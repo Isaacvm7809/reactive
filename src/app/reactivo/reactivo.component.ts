@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 import { ValidadoresService } from '../services/validadores.service';
+import { compileNgModule } from '@angular/compiler';
 
 @Component({
   selector: 'app-reactivo',
@@ -13,6 +14,7 @@ export class ReactivoComponent {
   constructor(private fb: FormBuilder, private validadores: ValidadoresService) {
     this.crearFormulario();
     this.cargarDataForm();
+    this.creaValidadores();
   }
 
   get getPasatiempos() {
@@ -65,6 +67,22 @@ export class ReactivoComponent {
       validators : this.validadores.validadoresIguales('contraseña.pass1','contraseña.pass2')  ,
     });
   }
+  
+
+  creaValidadores(){
+    
+    // this.forma.valueChanges.subscribe( valor => {
+    //   console.log(valor);
+    // });
+    this.forma.get('nombre')?.valueChanges.subscribe(valor=>{
+      console.log(valor);
+    });
+
+    // this.forma.statusChanges.subscribe(valor=>{
+    //   console.log(valor);
+    // });
+
+  }
 
 
   guardarPasatiempo(){
@@ -97,6 +115,7 @@ export class ReactivoComponent {
       nombre: 'Isaac',
       apellido: 'Vasquez',
       correo: 'isaacvm780923@gmail.com',
+      usuario :'asasdjadshhjasd',
       direccion: {
         distrito: 'Distrito51',
         ciudad: 'Tuxtla Gutiérrez'
